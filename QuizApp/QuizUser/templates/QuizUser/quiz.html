@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Quiz for <b>{{ user.username }}<b></h2>
+{% for question in questions %}
+<table>
+  <tr>
+    <th>Que {{ question.id }}: {{ question.question }}</th>
+  </tr>
+  <tr>
+    <th>Option A : {{ question.A }}</th>
+  </tr>
+  <tr>
+    <th>Option B : {{ question.B }}</th>
+  </tr>
+  <tr>
+    <th>Option C : {{ question.C }}</th>
+  </tr>
+  <tr>
+    <th>Option D : {{ question.D }}</th>
+  </tr>
+
+</table>
+	<br>
+	<label for="fname">Ans {{ question.id }}:</label>
+  <input type="text" id="fname" name="fname"><br><br><br>
+  
+{% endfor %}
+</body>
+{% endif %}
+{% endblock %}

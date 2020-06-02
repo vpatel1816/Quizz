@@ -8,11 +8,12 @@ from .models import quiz_que
 def home(request):
 	return render(request, 'QuizUser/home.html')
 
-
 def quiz(request):
-    questions = quiz_que.objects.all()
+    questions = quiz_que.objects.filter(qno='1')
     return render(request, 'QuizUser/quiz.html', {'questions':questions})
 
+
+    
 
 def register(request):
     if request.method == 'POST':

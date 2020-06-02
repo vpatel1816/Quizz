@@ -8,4 +8,5 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('register', views.register, name='register'),
     path('quiz', views.quiz, name='quiz'),
+    path('next_que/<int:qno>', views.next_que, name='next_que'),
 ]

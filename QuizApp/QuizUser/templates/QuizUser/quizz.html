@@ -24,49 +24,37 @@ tr:nth-child(even) {
 
 <h2>Quiz for <b>{{ user.username }}<b></h2>
 
-
-{% for question in questions %}
-{% if question.gans == "" %}
-
-
-
-
 <form method="POST" action="{% url 'quiz'%}">
   {% csrf_token %}
+{% for question in questions %}
+{% if question.gans == "" %}
   <table>
     <tr>
-        <th bgcolor="darkgrey"><u>Que {{ question.qno }}:</u>   {{ question.question }}</th>
+      <th bgcolor="darkgrey"><u>Que {{ question.qno }}:</u>   {{ question.question }}</th>
     </tr>
     <tr>
-        <th>Option A : {{ question.A }}</th>
+      <th>Option A : {{ question.A }}</th>
     </tr>
     <tr>
-        <th>Option B : {{ question.B }}</th>
+      <th>Option B : {{ question.B }}</th>
     </tr>
     <tr>
-        <th>Option C : {{ question.C }}</th>
+      <th>Option C : {{ question.C }}</th>
     </tr>
     <tr>
-       <th>Option D : {{ question.D }}</th>
+      <th>Option D : {{ question.D }}</th>
     </tr>
   </table>
-
   	<br>
   	<label for="fname">Ans {{ question.qno }}:</label> <input type="text" id="fname" name="answer"> <input type="submit">
 
     <br><br><br>
 
-</form>
-<br>
-
-<a href="{% url 'next_que/{{ question.qno }}' %}"> NEXT </a>
-
-
 {% endif %}  
 {% endfor %}
 <br><br><br>
 
-
+</form>
 
 
 

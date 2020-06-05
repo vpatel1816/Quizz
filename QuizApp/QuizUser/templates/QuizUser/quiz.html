@@ -25,13 +25,12 @@ tr:nth-child(even) {
 <h2>Quiz for <b>{{ user.username }}<b></h2>
 
 
-{% for question in questions %}
-{% if question.gans == "" %}
 
 
 
 
-<form method="POST" action="{% url 'quiz'%}">
+
+<form method="POST" action="/answer/{{ question.qno }}">
   {% csrf_token %}
   <table>
     <tr>
@@ -52,18 +51,24 @@ tr:nth-child(even) {
   </table>
 
   	<br>
-  	<label for="fname">Ans {{ question.qno }}:</label> <input type="text" id="fname" name="answer"> <input type="submit">
+  	<label for="fname">Ans {{ question.qno }}:</label> <input type="text" id="fname" name="answer" maxlength="1"> <input type="submit">
 
     <br><br><br>
+  <a href="/pre/{{ question.qno }}">< Previous..<a>
+
+  <a href="/next/{{ question.qno }}">..Next></a>
+  
+
+
 
 </form>
 <br>
+<br>
+<br>
+<br>
 
-<a href="{% url 'next_que/{{ question.qno }}' %}"> NEXT </a>
+<a href="{% url 'result' %}">Get The Result</a>
 
-
-{% endif %}  
-{% endfor %}
 <br><br><br>
 
 
@@ -72,5 +77,6 @@ tr:nth-child(even) {
 
 
 </body>
+{% else %}
 {% endif %}
 {% endblock %}

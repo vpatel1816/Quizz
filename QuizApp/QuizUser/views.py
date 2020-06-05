@@ -8,12 +8,43 @@ from .models import quiz_que
 def home(request):
 	return render(request, 'QuizUser/home.html')
 
+def result(request):
+    question = quiz_que.objects.all()
+    return render(request, 'QuizUser/result.html', {'question':question})
+
+def next(request, qno):
+    if qno<5:
+        qno+=1
+        question = quiz_que.objects.get(qno=qno)
+        return render(request, 'QuizUser/quiz.html', {'question':question})
+    else:
+        question = quiz_que.objects.get(qno=qno)
+        return render(request, 'QuizUser/quiz.html', {'question':question})
+
+def pre(request, qno):
+    if qno>1:
+        qno-=1
+        question = quiz_que.objects.get(qno=qno)
+        return render(request, 'QuizUser/quiz.html', {'question':question})
+    else:
+        question = quiz_que.objects.get(qno=qno)
+        return render(request, 'QuizUser/quiz.html', {'question':question})
+
+
+def answer(request, qno):
+    question = quiz_que.objects.get(qno=qno)
+    question.gans = request.POST.get('answer')
+    question.save()
+    return render(request,'QuizUser/quiz.html', {'question':question})
+
 def quiz(request):
-    questions = quiz_que.objects.filter(qno='1')
-    return render(request, 'QuizUser/quiz.html', {'questions':questions})
+    if request.method == "POST":
+        answer = request.POST.get('answer')
+    else:
+        
+        question = quiz_que.objects.get(qno=1)
+        return render(request, 'QuizUser/quiz.html', {'question':question})
 
-
-    
 
 def register(request):
     if request.method == 'POST':

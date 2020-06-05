@@ -46,7 +46,6 @@
 {% if user.is_authenticated %}
 <form method="get" action="{% url 'quiz' %}">
   {% csrf_token %}
-
 <button class="button"><span>Take a QUIZ </span></button>
 
 </form>
